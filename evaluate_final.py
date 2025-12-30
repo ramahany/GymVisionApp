@@ -1,3 +1,10 @@
+import os
+import sys
+
+# Add your project directory to Python's module search path
+# This makes MediaPipe look in your local directory first
+project_root = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, project_root)
 import mediapipe as mp
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
@@ -5,6 +12,7 @@ import cv2
 import numpy as np
 from calculate_angles import analyse_pic_front_balance, analyse_pic_side_balance
 
+model_path = "assets\mediapipe_models\pose_landmarker_heavy.task"
 # --- Entry Point ---
 def run_check(img_path, pose_chosen):
     bytes_data = img_path.getvalue()
@@ -21,7 +29,7 @@ def run_check(img_path, pose_chosen):
     print(resized_image.shape)
     with mp_pose.Pose(static_image_mode=True, 
                       min_detection_confidence=0.5,  
-                      model_complexity=0) as pose:
+                      model_complexity=2) as pose:
         input_img = cv2.cvtColor(resized_image, cv2.COLOR_BGR2RGB)
         results = pose.process(input_img)
 
