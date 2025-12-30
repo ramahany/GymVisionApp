@@ -5,6 +5,14 @@ import sys
 # This makes MediaPipe look in your local directory first
 project_root = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, project_root)
+
+# Check if model file exists
+model_file = "mediapipe/modules/pose_landmark/pose_landmark_heavy.tflite"
+if os.path.exists(model_file):
+    print(f"✓ Model file found: {model_file}")
+else:
+    print(f"✗ Model file NOT found: {model_file}")
+    
 import mediapipe as mp
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
