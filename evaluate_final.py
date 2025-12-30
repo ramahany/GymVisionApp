@@ -4,7 +4,11 @@ import sys
 # Add your project directory to Python's module search path
 # This makes MediaPipe look in your local directory first
 project_root = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, project_root)
+# Import and patch the download utils
+import mediapipe.python.solutions.download_utils as download_utils
+
+# Override the base path to your project directory
+download_utils._MEDIAPIPE_BASE_PATH = project_root
 
 # Check if model file exists
 model_file = "mediapipe/modules/pose_landmark/pose_landmark_heavy.tflite"
