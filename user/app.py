@@ -57,7 +57,9 @@ data = st.session_state.user
 name = data['name']
 st.header(f'welcome back {name}')
 poses = ["front balance / ميزان امامى", "side balance / ميزان جانبى"]
-pos = st.selectbox("evaluation for ...", poses, index=None, placeholder="Select pose ...", ).split('/')[0].strip()
+pos = st.selectbox("evaluation for ...", poses, index=None, placeholder="Select pose ...", )
+if pos != None : 
+    pos = pos.split('/')[0].strip()
 image = st.file_uploader("Choose an image...", type=["jpg", "png", "jpeg"])
 
 if image is not None:
