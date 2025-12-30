@@ -20,8 +20,8 @@ VisionRunningMode = mp.tasks.vision.RunningMode
 options = PoseLandmarkerOptions(
     base_options=BaseOptions(model_asset_path=model_path),
     running_mode=VisionRunningMode.IMAGE, 
-    min_pose_detection_confidence=0.5,  # Equivalent to min_detection_confidence
-    min_pose_presence_confidence=0.5)
+    min_pose_detection_confidence=0.3,  # Equivalent to min_detection_confidence
+    min_pose_presence_confidence=0.3)
 
 # --- Entry Point ---
 def run_check(img_path, pose_chosen):
