@@ -31,7 +31,6 @@ def add_to_report(score, pos, image):
 
     # Adding  the IMAGES to storage
     try:
-        # TODO save the bucket so its only created once 
         bucket = storage.bucket("forms-data-e0050.appspot.com")
         blob = bucket.blob(f'UsersData/EvaluatedImages/{st.session_state.user_id}{pos}{new_data["count"]}.png')
         blob.upload_from_string(image, content_type='image/png')
@@ -59,7 +58,7 @@ st.header(f'welcome back {name}')
 poses = ["front balance / ميزان امامى", "side balance / ميزان جانبى"]
 pos = st.selectbox("evaluation for ...", poses, index=None, placeholder="Select pose ...", )
 if pos != None : 
-    pos = pos.split('/')[0].strip()
+    pos = pos.split('/')[0].strip() # get the name of the pose
 image = st.file_uploader("Choose an image...", type=["jpg", "png", "jpeg"])
 
 if image is not None:
