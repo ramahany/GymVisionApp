@@ -21,7 +21,7 @@ def run_check(img_path, pose_chosen):
     print(resized_image.shape)
     with mp_pose.Pose(static_image_mode=True, 
                       min_detection_confidence=0.5,  
-                      model_path="assets/mediapipe_models/pose_landmark_full.tflite") as pose:
+                      model_complexity=0) as pose:
         input_img = cv2.cvtColor(resized_image, cv2.COLOR_BGR2RGB)
         results = pose.process(input_img)
 
