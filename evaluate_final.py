@@ -1,22 +1,3 @@
-import os
-import sys
-
-# Add your project directory to Python's module search path
-# This makes MediaPipe look in your local directory first
-project_root = os.path.dirname(os.path.abspath(__file__))
-# Import and patch the download utils
-import mediapipe.python.solutions.download_utils as download_utils
-
-# Override the base path to your project directory
-download_utils._MEDIAPIPE_BASE_PATH = project_root
-
-# Check if model file exists
-model_file = "mediapipe/modules/pose_landmark/pose_landmark_heavy.tflite"
-if os.path.exists(model_file):
-    print(f"✓ Model file found: {model_file}")
-else:
-    print(f"✗ Model file NOT found: {model_file}")
-    
 import mediapipe as mp
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
@@ -24,7 +5,6 @@ import cv2
 import numpy as np
 from calculate_angles import analyse_pic_front_balance, analyse_pic_side_balance
 
-model_path = "assets\mediapipe_models\pose_landmarker_heavy.task"
 # --- Entry Point ---
 def run_check(img_path, pose_chosen):
     bytes_data = img_path.getvalue()
@@ -40,8 +20,7 @@ def run_check(img_path, pose_chosen):
     resized_image = cv2.resize(image, new_size)
     print(resized_image.shape)
     with mp_pose.Pose(static_image_mode=True, 
-                      min_detection_confidence=0.5,  
-                      model_complexity=2) as pose:
+                      min_detection_confidence=0.5) as pose:
         input_img = cv2.cvtColor(resized_image, cv2.COLOR_BGR2RGB)
         results = pose.process(input_img)
 
