@@ -169,7 +169,7 @@ def analyse_pic_front_balance(w_landmarks, landmarks, img):
         feedback_str.append('ميل الجذع في وضع موازى لألرض')
     # get score 
     score = front_balance_score(angles=angels)- (1 if not hips_point  else 0)
-    return img, score, feedback_str
+    return img, score/2, feedback_str
 
 
 def analyse_pic_side_balance(w_landmarks, landmarks, img): 
@@ -214,5 +214,5 @@ def analyse_pic_side_balance(w_landmarks, landmarks, img):
     
     # get score 
     score = front_balance_score(angles=angels) - (1 if not hips_point  else 0)
-    return img, score, feedback_str
+    return img, score/2, feedback_str
 
