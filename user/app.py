@@ -67,7 +67,7 @@ if image is not None:
     if l:
         out_img, score, feedback = l
         test = st.image(out_img, channels='BGR')
-        st.title(f"You scored {score}/10")
+        st.title(f"You scored {score}/5")
         if len(feedback) > 0:
             st.markdown(
             "<div dir='rtl' style='text-align:right; color:red'>" 
