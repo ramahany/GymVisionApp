@@ -24,12 +24,13 @@ def get_user_data():
         ('Front Balance', 'LAST')
     ]), index=range(len(data)))
 
-
+    users_names = []
     for i, doc in enumerate(data):
         row = []
         doc = doc.to_dict()
 
         row.append(doc['name'])
+        users_names.append(doc["name"])
 
         side = doc['side_balance_states']
         front = doc['front_balance_states']
@@ -40,6 +41,7 @@ def get_user_data():
         
         # print(row)
         df.loc[i] = row
+    st.session_state["all_students"] = users_names
     return df
 
 def add_admin(username, name, password):
