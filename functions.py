@@ -34,12 +34,12 @@ def check_valid_user(username_, password_):
 
 
 def sign_up(username, name, password):
-    poses = ["front_balance", "side_balance"]
+    poses = ["front_balance", "side_balance", "star"]
     states = {
-        "avg": 0,
-        "max": -1,
-        "min": 20,
-        "last": 0,
+        "avg": None,
+        "max": None,
+        "min": None,
+        "last": None,
         "count": 0
     }
     data = {

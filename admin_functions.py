@@ -21,7 +21,12 @@ def get_user_data():
         ('Front Balance', 'MAX'),
         ('Front Balance', 'MIN'),
         ('Front Balance', 'COUNT'),
-        ('Front Balance', 'LAST')
+        ('Front Balance', 'LAST'),
+        ('Star', 'AVG'),
+        ('Star', 'MAX'),
+        ('Star', 'MIN'),
+        ('Star', 'COUNT'),
+        ('Star', 'LAST')
     ]), index=range(len(data)))
 
     users_names = []
@@ -34,8 +39,11 @@ def get_user_data():
 
         side = doc['side_balance_states']
         front = doc['front_balance_states']
+        star = doc['star_states']
         for value in ["avg", "max", "min", "count", "last"]:
             row.append(side[value])
+        for value in ["avg", "max", "min", "count", "last"]:
+            row.append(front[value])
         for value in ["avg", "max", "min", "count", "last"]:
             row.append(front[value])
         

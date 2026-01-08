@@ -57,7 +57,7 @@ def draw_two_lines_to_half(p1, p2, p3, image, color):
 
 
 # Specific angles and alignments (angle between leg, hips and shoulders)
-def get_the_engle_between_legs(landmarks, img):# and draw it
+def get_the_engle_between_legs(landmarks, img, thresh_hold = 85):# and draw it
     h, w =  img.shape[:2]
 
     # hips coordinates 
@@ -80,10 +80,11 @@ def get_the_engle_between_legs(landmarks, img):# and draw it
     color = (0,0,255)
     feed_back ='رفع الرجل الحرة عاليًا في المستوى الأفقي (زاوية 90 ْ او اكثر)'
     score = 0
-    if angle >= 85: 
+    if angle >= thresh_hold: 
         color = (0,255,0)
         feed_back = ''
-        score += 1 if angle < 100 else 2 
+        score = 1
+
     draw_two_lines(a, b, c, img, color=color)
 
     return angle, score, feed_back
@@ -216,3 +217,53 @@ def analyse_pic_side_balance(w_landmarks, landmarks, img):
     score = front_balance_score(angles=angels) - (1 if not hips_point  else 0)
     return img, score/2, feedback_str
 
+def analyse_pic_star_pose(w_landmarks, landmarks, img): 
+    h, w =  img.shape[:2]
+    score, feedback_str = 0, []
+    angels = {}
+    #Calculate angle between legs and the score 
+    angle_between_leg, score, feed_back = get_the_engle_between_legs(landmarks, img, thresh_hold=80)
+    angels["angle_between_leg"] = angle_between_leg
+    if feed_back != '':
+        feedback_str.append("القفز عاليا مع زاوية 90 او اكبر ما بين الساقين")
+
+    checks = [
+        ("LEFT_HIP",[mp_pose.PoseLandmark.LEFT_SHOULDER.value, mp_pose.PoseLandmark.LEFT_HIP.value, mp_pose.PoseLandmark.LEFT_KNEE.value], 50, 155, 'رفع الساق اليسرى لاعلي', False),
+        ("LEFT_ARM", [mp_pose.PoseLandmark.LEFT_HIP.value, mp_pose.PoseLandmark.LEFT_SHOULDER.value,mp_pose.PoseLandmark.LEFT_ELBOW.value ], 120, 190, 'رفع الذراع اليسرى لاعلي', True),
+        ("RIGHT_HIP",[mp_pose.PoseLandmark.RIGHT_SHOULDER.value, mp_pose.PoseLandmark.RIGHT_HIP.value, mp_pose.PoseLandmark.RIGHT_KNEE.value], 50, 155, 'رفع الساق اليمني لاعلي', True),
+        ("RIGHT_ARM", [mp_pose.PoseLandmark.RIGHT_ELBOW.value, mp_pose.PoseLandmark.RIGHT_SHOULDER.value, mp_pose.PoseLandmark.RIGHT_HIP.value], 120, 190, 'رفع الذراع اليمني لاعلي', True),
+            ]
+
+    # validation and adding angles to the dict
+    for angle_name, points, min_a, max_a, fb, invert in checks:
+        # if angle_name == "LEFT_ARM":
+        #     angle = get_angle_between_points(*points)
+        # else:
+        angle = calculate_joint_angle(*points, w, h, landmarks=landmarks, invert=invert) 
+        angels[angle_name] = abs(angle)
+        color = (0,0,255)
+        if max_a >= abs(angle) and abs(angle) >= min_a: 
+            color = (0,255,0)
+            score += 1
+        else: 
+            feedback_str.append(fb)
+            coo = []
+            for p in points: 
+                coo.append([landmarks[p].x *w, landmarks[p].y *h])
+            draw_two_lines(*coo, img, color)
+
+
+    # ## print
+    # font = cv2.FONT_HERSHEY_SIMPLEX 
+    # font_scale = 1
+    # # Color in BGR format (e.g., White is (255, 255, 255))
+    # color = (255, 255, 255) 
+    # thickness = 1
+    # # For a smoother look
+    # line_type = cv2.LINE_AA 
+    # y = 100
+    # for key, value in angels.items(): 
+    #     cv2.putText(img, key+str(value), (50,y), 
+    #                 font, font_scale, color, thickness, line_type)
+    #     y+=30
+    return img, score, feedback_str

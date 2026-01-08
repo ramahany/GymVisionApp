@@ -4,7 +4,7 @@ from firebase_admin import firestore
 import pandas as pd
 import numpy as np
 
-front_balance_data , side_balance_data = {}, {}
+front_balance_data , side_balance_data, star_data = {}, {}, {}
 
 firebase_admin.get_app()
 db = firestore.client()
@@ -18,6 +18,9 @@ if collec_ref:
 
         elif doc.id == "side balance":
             side_balance_data = doc.to_dict()
+        
+        elif doc.id == "star":
+            star_data = doc.to_dict()
 
 data = st.session_state.user
 st.header(f'Welcome {data["name"]}')
@@ -41,6 +44,16 @@ df = pd.DataFrame({
     'score': [inner["Scroe"] for inner in side_balance_data.values()]
 })
 
+# df['time'] = pd.to_datetime(df['time'])  # Convert to datetime if needed
+
+st.line_chart(df, x='time', y='score')
+
+# star graph and data
+st.title("Star Graph")
+df = pd.DataFrame({
+    'time': star_data.keys(),
+    'score': [inner["Scroe"] for inner in star_data.values()]
+})
 # df['time'] = pd.to_datetime(df['time'])  # Convert to datetime if needed
 
 st.line_chart(df, x='time', y='score')
