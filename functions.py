@@ -34,7 +34,8 @@ def check_valid_user(username_, password_):
 
 
 def sign_up(username, name, password):
-    poses = ["front_balance", "side_balance", "star"]
+    poses = ["front_balance", "side_balance", "star_jump", 
+            "scissors_leap", "pivot_arabesque", "pivot_passé"]
     states = {
         "avg": None,
         "max": None,

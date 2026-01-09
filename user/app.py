@@ -58,14 +58,24 @@ def add_to_report(score, pos, image):
     else:
         st.success(f"score added to {pos} report")
 
-
-
+def reset_session():
+    st.session_state.uploader_key += 1
+    st.session_state['processed_video_path'] = None
+    st.session_state['done_video_path'] = ''
+    st.session_state['best_frame'] = None
+    st.session_state['best_frame'] = {
+    "score" : -1, 
+    "frame" : [],
+    "feed_back" : []
+}
 
 data = st.session_state.user
 name = data['name']
 st.header(f'welcome back {name}')
-poses = ["front balance / ميزان امامى", "side balance / ميزان جانبى", "star / نجمة"]
-pos = st.selectbox("evaluation for ...", poses, index=None, placeholder="Select pose ...", )
+poses = ["front balance / ميزان امامى", "side balance / ميزان جانبى",
+        "star jump / وثبة النجمة", "scissors leap / وثبة المقص",
+        "pivot arabesque / دوران أرابيسك", "pivot passé / دوران بالارتكاز (باسيه)"]
+pos = st.selectbox("evaluation for ...", poses, index=None, placeholder="Select pose ...", on_change=reset_session )
 
 if pos != None : 
     pos = pos.split('/')[0].strip() # get the name of the pose
@@ -78,8 +88,12 @@ if 'done_video_path' not in st.session_state:
 
 if 'best_frame' not in st.session_state:
     st.session_state['best_frame'] = None
-if pos == 'star':
-    video = st.file_uploader("Upload your video...", type=["mp4", "mov", "avi", "webm"])
+
+if "uploader_key" not in st.session_state:
+    st.session_state["uploader_key"] = 0
+
+if pos in ["star jump", "scissors leap", "pivot arabesque", "pivot passé"]:
+    video = st.file_uploader("Upload your video...", type=["mp4", "mov", "avi", "webm"], key=f"video_uploader_{st.session_state.uploader_key}")
     
     if video :
         if st.session_state['processed_video_path'] != video:
@@ -137,7 +151,6 @@ if pos == 'star':
 
         with col1:
             st.header("Analysed Video: ")
-                    # Display video using bytes (works on Streamlit Cloud)
             with open(st.session_state['done_video_path'], "rb") as f:
                 video_bytes = f.read()
                 st.video(video_bytes)
@@ -165,7 +178,7 @@ if pos == 'star':
        
         
                          
-elif pos != None:
+elif pos in ["front balance", "side balance"]:
     image = st.file_uploader("Choose an image...", type=["jpg", "png", "jpeg"])
 
     if image is not None and pos != None:

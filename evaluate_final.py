@@ -62,10 +62,11 @@ def run_check_video(frame, pose_chosen):
                 )
         landmarks = results.pose_landmarks[0]
         w_landmarks = results.pose_world_landmarks[0]
-    if pose_chosen == "star":
+    if pose_chosen == "star jump":
         return analyse_pic_star_pose(w_landmarks, landmarks, resized_image)
-    
-    return None
+    else:
+        return resized_image, 3, ''
+
 def run_check(img_path, pose_chosen):
 
     bytes_data = img_path.getvalue()

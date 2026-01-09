@@ -22,11 +22,26 @@ def get_user_data():
         ('Front Balance', 'MIN'),
         ('Front Balance', 'COUNT'),
         ('Front Balance', 'LAST'),
-        ('Star', 'AVG'),
-        ('Star', 'MAX'),
-        ('Star', 'MIN'),
-        ('Star', 'COUNT'),
-        ('Star', 'LAST')
+        ('Star Jump', 'AVG'),
+        ('Star Jump', 'MAX'),
+        ('Star Jump', 'MIN'),
+        ('Star Jump', 'COUNT'),
+        ('Star Jump', 'LAST'),
+        ('Scissors Leap', 'AVG'),
+        ('Scissors Leap', 'MAX'),
+        ('Scissors Leap', 'MIN'),
+        ('Scissors Leap', 'COUNT'),
+        ('Scissors Leap', 'LAST'),
+        ('Pivot Arabesque', 'AVG'),
+        ('Pivot Arabesque', 'MAX'),
+        ('Pivot Arabesque', 'MIN'),
+        ('Pivot Arabesque', 'COUNT'),
+        ('Pivot Arabesque', 'LAST'),
+        ('Pivot Passé', 'AVG'),
+        ('Pivot Passé', 'MAX'),
+        ('Pivot Passé', 'MIN'),
+        ('Pivot Passé', 'COUNT'),
+        ('Pivot Passé', 'LAST'),
     ]), index=range(len(data)))
 
     users_names = []
@@ -39,14 +54,23 @@ def get_user_data():
 
         side = doc['side_balance_states']
         front = doc['front_balance_states']
-        star = doc['star_states']
+        star = doc['star_jump_states']
+        scissors = doc['scissors_leap_states']
+        arabesque = doc['pivot_arabesque_states']
+        pivot = doc['pivot_passé_states']
+
         for value in ["avg", "max", "min", "count", "last"]:
             row.append(side[value])
         for value in ["avg", "max", "min", "count", "last"]:
             row.append(front[value])
         for value in ["avg", "max", "min", "count", "last"]:
-            row.append(front[value])
-        
+            row.append(star[value])
+        for value in ["avg", "max", "min", "count", "last"]:
+            row.append(scissors[value])
+        for value in ["avg", "max", "min", "count", "last"]:
+            row.append(arabesque[value])       
+        for value in ["avg", "max", "min", "count", "last"]:
+            row.append(pivot[value])      
         # print(row)
         df.loc[i] = row
     st.session_state["all_students"] = users_names
