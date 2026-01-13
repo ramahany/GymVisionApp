@@ -173,6 +173,20 @@ if pos in ["star jump", "scissors leap", "pivot arabesque", "pivot passé"]:
         )
         is_success, buffer = cv2.imencode(".png", st.session_state['best_frame']["frame"])
         io_buf = buffer.tobytes()
+        col1_2, col2_2 = st.columns(2)
+        with col1_2:
+            if st.button("Go to References", use_container_width=True):
+                st.switch_page("user/reference.py")
+
+        with col2_2:
+            # Create a download button
+            st.download_button(
+                label="Download Image",
+                data=io_buf,
+                file_name="image.png",
+                mime="image/png",
+                use_container_width=True
+            )
         st.button("Submit Score", type="primary", use_container_width=True, on_click=add_to_report, args=(score, pos, io_buf))
 
        
