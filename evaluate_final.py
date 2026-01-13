@@ -3,7 +3,7 @@ mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
 import cv2
 import numpy as np
-from calculate_angles import analyse_pic_front_balance, analyse_pic_side_balance, analyse_pic_star_pose
+from calculate_angles import analyse_pic_front_balance, analyse_pic_side_balance, analyse_pic_star_pose, analyse_pic_passe_pose
 from mediapipe.framework.formats import landmark_pb2
 
 # model_path = 'mediapipe\models\pose_landmarker_heavy.task'
@@ -64,6 +64,8 @@ def run_check_video(frame, pose_chosen):
         w_landmarks = results.pose_world_landmarks[0]
     if pose_chosen == "star jump":
         return analyse_pic_star_pose(w_landmarks, landmarks, resized_image)
+    elif pose_chosen == "pivot passé":
+         return analyse_pic_passe_pose(w_landmarks, landmarks, resized_image)
     else:
         return resized_image, 3, ''
 

@@ -267,3 +267,49 @@ def analyse_pic_star_pose(w_landmarks, landmarks, img):
     #                 font, font_scale, color, thickness, line_type)
     #     y+=30
     return img, score, feedback_str
+
+def analyse_pic_passe_pose(w_landmarks, landmarks, img):
+    h, w =  img.shape[:2]
+    score, feedback_str = 0, []
+    angels = {}
+
+    checks = [
+        ("LEFT_KNEE",[mp_pose.PoseLandmark.LEFT_HIP.value, mp_pose.PoseLandmark.LEFT_KNEE.value, mp_pose.PoseLandmark.LEFT_ANKLE.value], 0, 70,'ثني الركبة اليسرى', False ),
+        ("RIGHT_KNEE", [mp_pose.PoseLandmark.RIGHT_HIP.value, mp_pose.PoseLandmark.RIGHT_KNEE.value, mp_pose.PoseLandmark.RIGHT_ANKLE.value], 170, 190, 'فرد الركبة في الرجل اليمنى', False)
+ 
+        ]
+
+    # validation and adding angles to the dict
+    angle_name, points, min_a, max_a, fb, invert = checks[0]
+    angle = calculate_joint_angle(*points, w, h, landmarks=landmarks, invert=invert) 
+    angels[angle_name] = abs(angle)
+    color = (0,0,255)
+    if max_a >= abs(angle) : 
+            color = (0,255,0)
+            if abs(angle) < 35 :
+                score += 4 
+            else: 
+                score += 3
+                feedback_str.append("ثني الركبة اليمن اكثر")
+    else: 
+        feedback_str.append(fb)
+        coo = []
+        for p in points: 
+            coo.append([landmarks[p].x *w, landmarks[p].y *h])
+        draw_two_lines(*coo, img, color)
+    ##############################################3
+    angle_name, points, min_a, max_a, fb, invert = checks[1]
+    angle = calculate_joint_angle(*points, w, h, landmarks=landmarks, invert=invert) 
+    angels[angle_name] = abs(angle)
+    color = (0,0,255)
+    if max_a >= abs(angle) : 
+            color = (0,255,0)
+            score += 1
+    else: 
+        feedback_str.append(fb)
+        coo = []
+        for p in points: 
+            coo.append([landmarks[p].x *w, landmarks[p].y *h])
+        draw_two_lines(*coo, img, color)   
+
+    return img, score, feedback_str
