@@ -186,23 +186,26 @@ elif pos in ["front balance", "side balance"]:
         l = run_check(image, pos)
         if l:
             out_img, score, feedback = l
-            test = st.image(out_img, channels='BGR')
-            st.title(f"You scored {score}/5")
-            if len(feedback) > 0:
-                st.markdown(
-                "<div dir='rtl' style='text-align:right; color:red'>" 
-                + "".join([f"<h4>{line}</h4>" for line in feedback])
-                + "</div>",
-                unsafe_allow_html=True
-            )
-            is_success, buffer = cv2.imencode(".png", out_img)
-            io_buf = buffer.tobytes()
             col1, col2 = st.columns(2)
             with col1:
+                test = st.image(out_img, channels='BGR')
+            with col2:
+                st.title(f"You scored {score}/5")
+                if len(feedback) > 0:
+                    st.markdown(
+                    "<div dir='rtl' style='text-align:right; color:red'>" 
+                    + "".join([f"<h4>{line}</h4>" for line in feedback])
+                    + "</div>",
+                    unsafe_allow_html=True
+                )
+            is_success, buffer = cv2.imencode(".png", out_img)
+            io_buf = buffer.tobytes()
+            col1_2, col2_2 = st.columns(2)
+            with col1_2:
                 if st.button("Go to References", use_container_width=True):
                     st.switch_page("user/reference.py")
 
-            with col2:
+            with col2_2:
                 # Create a download button
                 st.download_button(
                     label="Download Image",
