@@ -26,8 +26,11 @@ with st.expander("التوازن الجانبي"):
 
     st.image("images/ref/side.png")
 
+with st.expander("الدوران بالارتكاز"):
 
-with st.expander("وثبات و الدوران بالارتكاز"):
+    st.image("images/ref/dwran.jpeg")
+    
+with st.expander("وثبات"):
 
     st.image("images/ref/1_jump.jpeg")
     st.image("images/ref/2_jump.jpeg")
