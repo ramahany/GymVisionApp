@@ -212,6 +212,15 @@ elif pos in ["front balance", "side balance"]:
                     + "</div>",
                     unsafe_allow_html=True
                 )
+            if pos == "front balance":
+                col1_1, col2_1= st.columns(2)
+                with col1_1: 
+                    st.image("images/balance/fron_balance.jpeg")
+                    st.video("images/balance/v1.mp4")
+                    st.video("images/balance/v3.mp4")
+                with col2_1:
+                    st.video("images/balance/v2.mp4")
+
             is_success, buffer = cv2.imencode(".png", out_img)
             io_buf = buffer.tobytes()
             col1_2, col2_2 = st.columns(2)
@@ -229,8 +238,10 @@ elif pos in ["front balance", "side balance"]:
                     use_container_width=True
                 )
             st.button("Submit Score", type="primary", use_container_width=True, on_click=add_to_report, args=(score, pos, io_buf))
+
         else:
             st.error('invalid image, please upload another image!', icon="🚨")
+
 
 
 
