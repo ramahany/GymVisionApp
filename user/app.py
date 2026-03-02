@@ -220,6 +220,15 @@ elif pos in ["front balance", "side balance"]:
                     st.video("images/balance/v3.mp4")
                 with col2_1:
                     st.video("images/balance/v2.mp4")
+                    
+            if pos == "side balance":
+                col1_s, col2_s = st.columns(2)
+                with col1_s :
+                    st.video("images/balance/s1.mp4")
+                    st.video("images/balance/s2.mp4")
+                with col2_s:
+                    st.image("images/balance/side_balance.jpeg")
+                    st.video("images/balance/s3.mp4")
 
             is_success, buffer = cv2.imencode(".png", out_img)
             io_buf = buffer.tobytes()

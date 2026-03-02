@@ -10,19 +10,15 @@ with st.expander("التوازن األمامي "):
             للخارج قليالً
             بالجذع في وضع أفقي موازى لألرض مع استقامة الكتفين على خط واحد. '''
     st.markdown(f"<div dir='rtl'>{text}</div>", unsafe_allow_html=True)
-
-    
-    col1_1, col2_1 = st.columns(2)
-    with col1_1: 
-        st.image("images/balance/fron_balance.jpeg")
-    with col2_1:
-        st.image("images/ref/front.png")
+    st.image("images/ref/front.png")
 
     col1, col2 = st.columns(2)
     with col1 : 
+        st.image("images/balance/fron_balance.jpeg")
         st.video("images/balance/v1.mp4")
         st.video("images/balance/v3.mp4")
-    with col2 : st.video("images/balance/v2.mp4")
+    with col2 :
+        st.video("images/balance/v2.mp4")
 
 with st.expander("التوازن الجانبي"):
     text = '''
@@ -35,7 +31,13 @@ with st.expander("التوازن الجانبي"):
        '''
     st.markdown(f"<div dir='rtl'>{text}</div>", unsafe_allow_html=True)
     st.image("images/ref/side.png")
-
+    col1_s, col2_s = st.columns(2)
+    with col1_s :
+        st.video("images/balance/s1.mp4")
+        st.video("images/balance/s2.mp4")
+    with col2_s:
+        st.image("images/balance/side_balance.jpeg")
+        st.video("images/balance/s3.mp4")
 
 
 
