@@ -142,10 +142,10 @@ def analyse_pic_front_balance(w_landmarks, landmarks, img):
     feedback_str.append(feed_back)
 
     checks = [
-        ("RIGHT_KNEE", [mp_pose.PoseLandmark.RIGHT_HIP.value, mp_pose.PoseLandmark.RIGHT_KNEE.value, mp_pose.PoseLandmark.RIGHT_ANKLE.value], 170, 190, 'فرد الركبة في الرجل اليمنى', False),
+        ("RIGHT_KNEE", [mp_pose.PoseLandmark.RIGHT_HIP.value, mp_pose.PoseLandmark.RIGHT_KNEE.value, mp_pose.PoseLandmark.RIGHT_ANKLE.value], 170, 190, 'فرد ركبة رجل الارتكاز', False),
         ("LEFT_HIP",[mp_pose.PoseLandmark.LEFT_SHOULDER.value, mp_pose.PoseLandmark.LEFT_HIP.value, mp_pose.PoseLandmark.LEFT_KNEE.value], 50, 185, 'رفع الجذع لاعلي', False),
         ("RIGHT_HIP",[mp_pose.PoseLandmark.RIGHT_SHOULDER.value, mp_pose.PoseLandmark.RIGHT_HIP.value, mp_pose.PoseLandmark.RIGHT_KNEE.value], 85, 110, 'ميل الجذع أماما ً في وضع موازى لألرض', True),
-        ("LEFT_KNEE",[mp_pose.PoseLandmark.LEFT_HIP.value, mp_pose.PoseLandmark.LEFT_KNEE.value, mp_pose.PoseLandmark.LEFT_ANKLE.value], 170, 190, 'فرد الركبة  في الرجل اليسرى', False ),
+        ("LEFT_KNEE",[mp_pose.PoseLandmark.LEFT_HIP.value, mp_pose.PoseLandmark.LEFT_KNEE.value, mp_pose.PoseLandmark.LEFT_ANKLE.value], 170, 190, 'فرد ركبة الرجل الحرة ', False ),
         ("LEFT_ANKLE",[mp_pose.PoseLandmark.LEFT_KNEE.value, mp_pose.PoseLandmark.LEFT_ANKLE.value, mp_pose.PoseLandmark.LEFT_FOOT_INDEX.value], 130, 190, 'فرد مشط القدم', True)
     ]
     
@@ -184,10 +184,10 @@ def analyse_pic_side_balance(w_landmarks, landmarks, img):
     feedback_str.append(feed_back)
 
     checks = [
-        ("RIGHT_KNEE", [mp_pose.PoseLandmark.RIGHT_HIP.value, mp_pose.PoseLandmark.RIGHT_KNEE.value, mp_pose.PoseLandmark.RIGHT_ANKLE.value], 170, 190, 'فرد الركبة في الرجل اليمنى', False),
+        ("RIGHT_KNEE", [mp_pose.PoseLandmark.RIGHT_HIP.value, mp_pose.PoseLandmark.RIGHT_KNEE.value, mp_pose.PoseLandmark.RIGHT_ANKLE.value], 170, 190, 'فرد ركبة رجل الارتكاز', False),
         ("LEFT_HIP",[mp_pose.PoseLandmark.LEFT_SHOULDER.value, mp_pose.PoseLandmark.LEFT_HIP.value, mp_pose.PoseLandmark.LEFT_KNEE.value], 50 , 185, 'رفع الجذع لاعلي', False),
         ("RIGHT_HIP",[mp_pose.PoseLandmark.RIGHT_SHOULDER.value, mp_pose.PoseLandmark.RIGHT_HIP.value, mp_pose.PoseLandmark.RIGHT_KNEE.value], 85, 110, 'ميل الجذع جانبـاً في وضع موازى لألرض', True),
-        ("LEFT_KNEE",[mp_pose.PoseLandmark.LEFT_HIP.value, mp_pose.PoseLandmark.LEFT_KNEE.value, mp_pose.PoseLandmark.LEFT_ANKLE.value], 170, 190, 'فرد الركبة  في الرجل اليسرى', False ),
+        ("LEFT_KNEE",[mp_pose.PoseLandmark.LEFT_HIP.value, mp_pose.PoseLandmark.LEFT_KNEE.value, mp_pose.PoseLandmark.LEFT_ANKLE.value], 170, 190, 'فرد ركبة الرجل الحرة ', False ),
         ("LEFT_ANKLE",[mp_pose.PoseLandmark.LEFT_KNEE.value, mp_pose.PoseLandmark.LEFT_ANKLE.value, mp_pose.PoseLandmark.LEFT_FOOT_INDEX.value], 130, 190, 'فرد مشط القدم', True)
     ]
     
@@ -275,7 +275,7 @@ def analyse_pic_passe_pose(w_landmarks, landmarks, img):
 
     checks = [
         ("LEFT_KNEE",[mp_pose.PoseLandmark.LEFT_HIP.value, mp_pose.PoseLandmark.LEFT_KNEE.value, mp_pose.PoseLandmark.LEFT_ANKLE.value], 0, 70,'ثني الركبة اليسرى', False ),
-        ("RIGHT_KNEE", [mp_pose.PoseLandmark.RIGHT_HIP.value, mp_pose.PoseLandmark.RIGHT_KNEE.value, mp_pose.PoseLandmark.RIGHT_ANKLE.value], 170, 190, 'فرد الركبة في الرجل اليمنى', False)
+        ("RIGHT_KNEE", [mp_pose.PoseLandmark.RIGHT_HIP.value, mp_pose.PoseLandmark.RIGHT_KNEE.value, mp_pose.PoseLandmark.RIGHT_ANKLE.value], 170, 190, 'فرد ركبة رجل الارتكاز', False)
  
         ]
 
