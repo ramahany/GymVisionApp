@@ -11,7 +11,6 @@ import pandas as pd
 firebase_admin.get_app()
 db = firestore.client()
 
-st.write("hehehehehehe")
 option = st.selectbox(
     "Select student to show their work!",
     st.session_state.all_students,
