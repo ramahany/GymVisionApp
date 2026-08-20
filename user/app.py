@@ -40,18 +40,18 @@ def add_to_report(score, pos, image):
 
     # Adding  the IMAGES to storage
     try:
-        bucket = storage.bucket("forms-data-e0050.appspot.com")
-        blob = bucket.blob(f'UsersData/EvaluatedImages/{st.session_state.user_id}{pos}{new_data["count"]}.png')
-        blob.upload_from_string(image, content_type='image/png')
-        blob.make_public()
-        # url = blob.public_url
-        report_ref.set({
-        str(now):
-        {
-        "Scroe": score,
-        "image": blob.public_url
-        }
-        }, merge=True)
+        # bucket = storage.bucket("forms-data-e0050.appspot.com")
+        # blob = bucket.blob(f'UsersData/EvaluatedImages/{st.session_state.user_id}{pos}{new_data["count"]}.png')
+        # blob.upload_from_string(image, content_type='image/png')
+        # blob.make_public()
+        # # url = blob.public_url
+        # report_ref.set({
+        # str(now):
+        # {
+        # "Scroe": score,
+        # "image": blob.public_url
+        # }
+        # }, merge=True)
         doc_ref.update({f"{pos.replace(' ', '_')}_states": new_data})
     except Exception as e:
         st.error(f"Error occurred while submiting your score, please try again!")
