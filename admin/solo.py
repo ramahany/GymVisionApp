@@ -25,7 +25,7 @@ if option != None:
     df_front_balance = pd.DataFrame(columns=("Date","Image","Score"))
     df_side_balance = pd.DataFrame(columns=("Date","Image","Score"))
 
-
+    print("SHOW DATA FOR ", option)
 
     for score in collec_ref.stream(): # the stream wil get both collections the side and front balance
         if score.id == "front balance":
